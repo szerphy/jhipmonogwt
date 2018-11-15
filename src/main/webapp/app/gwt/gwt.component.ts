@@ -8,5 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class GwtComponent implements OnInit {
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        // load gwt script
+        const node = document.createElement('script');
+        node.src = 'jhipmonogwt/jhipmonogwt.nocache.js';
+        node.type = 'text/javascript';
+        node.async = false;
+        node.charset = 'utf-8';
+        document.getElementById('gwt').appendChild(node);
+    }
 }
