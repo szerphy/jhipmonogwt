@@ -240,6 +240,8 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-library"
     testCompile "com.h2database:h2"
     liquibaseRuntime "com.h2database:h2"
+    compile "org.fusesource.restygwt:restygwt:2.2.3"
+    compile "javax.ws.rs:javax.ws.rs-api:2.1.1"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 
