@@ -3,6 +3,7 @@ package com.zerphy.jhipmonogwt.config;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
+import com.zerphy.jhipmonogwt.gwt.server.GreetingServiceImpl;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.JHipsterProperties;
 import io.github.jhipster.config.h2.H2ConfigurationHelper;
@@ -59,6 +60,7 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
         }
         EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
         initMetrics(servletContext, disps);
+        registerGreetServlet(servletContext);
         if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_PRODUCTION)) {
             initCachingHttpHeadersFilter(servletContext, disps);
         }
@@ -176,6 +178,11 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
         metricsAdminServlet.addMapping("/management/metrics/*");
         metricsAdminServlet.setAsyncSupported(true);
         metricsAdminServlet.setLoadOnStartup(2);
+    }
+
+    private void registerGreetServlet(ServletContext servletContext) {
+        ServletRegistration reg = servletContext.addServlet("greetServlet", new GreetingServiceImpl());
+        reg.addMapping("/jhipmonogwt/greet");
     }
 
     @Bean
