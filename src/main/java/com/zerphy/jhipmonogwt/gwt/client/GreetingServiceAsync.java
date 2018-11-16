@@ -1,11 +1,12 @@
 package com.zerphy.jhipmonogwt.gwt.client;
 
+import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * The async counterpart of <code>GreetingService</code>.
  */
 public interface GreetingServiceAsync {
-  void greetServer(String input, AsyncCallback<String> callback)
+  RequestBuilder greetServer(String input, AsyncCallback<String> callback)
       throws IllegalArgumentException;
 }

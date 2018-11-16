@@ -7,6 +7,9 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestException;
+import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -20,6 +23,7 @@ import com.zerphy.jhipmonogwt.gwt.shared.FieldVerifier;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
+@SuppressWarnings("ALL")
 public class GwtEntry implements EntryPoint {
   /**
    * The message displayed to the user when the server cannot be reached or
@@ -34,10 +38,15 @@ public class GwtEntry implements EntryPoint {
    */
   private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
+  private String jwtToken;
+
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() {
+    Storage sessionStorage = Storage.getSessionStorageIfSupported();
+    jwtToken = sessionStorage.getItem("jhi-authenticationtoken").replaceAll("^\"|\"$", "");
+
     final Button sendButton = new Button("Send");
     final TextBox nameField = new TextBox();
     nameField.setText("GWT User");
@@ -118,14 +127,10 @@ public class GwtEntry implements EntryPoint {
         sendButton.setEnabled(false);
         textToServerLabel.setText(textToServer);
         serverResponseLabel.setText("");
-        greetingService.greetServer(textToServer, new AsyncCallback<String>() {
+        RequestBuilder request = greetingService.greetServer(textToServer, new AsyncCallback<String>() {
           public void onFailure(Throwable caught) {
             // Show the RPC error message to the user
-            dialogBox.setText("Remote Procedure Call - Failure");
-            serverResponseLabel.addStyleName("serverResponseLabelError");
-            serverResponseLabel.setHTML(SERVER_ERROR);
-            dialogBox.center();
-            closeButton.setFocus(true);
+            displayRpcError();
           }
 
           public void onSuccess(String result) {
@@ -136,6 +141,20 @@ public class GwtEntry implements EntryPoint {
             closeButton.setFocus(true);
           }
         });
+        request.setHeader("Authorization","Bearer " + jwtToken);
+        try {
+          request.send();
+        } catch (RequestException e) {
+          displayRpcError();
+        }
+      }
+
+      private void displayRpcError() {
+        dialogBox.setText("Remote Procedure Call - Failure");
+        serverResponseLabel.addStyleName("serverResponseLabelError");
+        serverResponseLabel.setHTML(SERVER_ERROR);
+        dialogBox.center();
+        closeButton.setFocus(true);
       }
     }
 
