@@ -18,6 +18,7 @@ import { JhipmonogwtHomeModule } from './home/home.module';
 import { JhipmonogwtAccountModule } from './account/account.module';
 import { JhipmonogwtEntityModule } from './entities/entity.module';
 import { GwtModule } from './gwt/gwt.module';
+import { GwtRestModule } from './gwt-rest/gwt-rest.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
@@ -33,7 +34,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         JhipmonogwtAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         JhipmonogwtEntityModule,
-        GwtModule
+        GwtModule,
+        GwtRestModule
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
     providers: [
