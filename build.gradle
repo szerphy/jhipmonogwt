@@ -80,7 +80,8 @@ springBoot {
 
 gwt {
     gwtVersion='2.8.2'
-    modules 'com.zerphy.jhipmonogwt.gwt.Jhipmonogwt','com.zerphy.jhipmonogwt.gwtrest.GwtRest'
+//    gwtVersion='2.7.0'
+    modules 'com.zerphy.jhipmonogwt.gwt.Jhipmonogwt','com.zerphy.jhipmonogwt.gwtrest.GwtRest','com.zerphy.jhipmonogwt.gwtdispatch.GwtDispatch'
     maxHeapSize = '1024M'
 }
 
@@ -154,6 +155,13 @@ repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
+    maven {
+        credentials {
+            username "$senchaUser"
+            password "$senchaPassword"
+        }
+        url 'https://maven.sencha.com/repo/gxt-support-commercial-release'
+    }
     //jhipster-needle-gradle-repositories - JHipster will add additional repositories
 }
 
@@ -240,8 +248,12 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-library"
     testCompile "com.h2database:h2"
     liquibaseRuntime "com.h2database:h2"
-    compile "org.fusesource.restygwt:restygwt:2.2.3"
+    compileOnly "org.fusesource.restygwt:restygwt:2.2.3"
     compile "javax.ws.rs:javax.ws.rs-api:2.1.1"
+    compile "net.customware.gwt.dispatch:gwt-dispatch:1.2.0"
+    compile "com.sencha.gxt:gxt:4.0.2"
+    compile "com.google.inject:guice:4.2.2"
+    compile "com.google.inject.extensions:guice-servlet:4.2.2"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 

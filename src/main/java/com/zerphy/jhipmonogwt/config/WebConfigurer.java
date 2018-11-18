@@ -3,7 +3,9 @@ package com.zerphy.jhipmonogwt.config;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
+import com.google.inject.servlet.GuiceFilter;
 import com.zerphy.jhipmonogwt.gwt.server.GreetingServiceImpl;
+import com.zerphy.jhipmonogwt.gwtshared.server.guice.GuiceServletConfig;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.JHipsterProperties;
 import io.github.jhipster.config.h2.H2ConfigurationHelper;
@@ -13,7 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
-import org.springframework.boot.web.server.*;
+import org.springframework.boot.web.server.MimeMappings;
+import org.springframework.boot.web.server.WebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +33,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.EnumSet;
 
 import static java.net.URLDecoder.decode;
 
@@ -61,6 +65,7 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
         EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
         initMetrics(servletContext, disps);
         registerGreetServlet(servletContext);
+        registerDispatchFilter(servletContext, disps);
         if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_PRODUCTION)) {
             initCachingHttpHeadersFilter(servletContext, disps);
         }
@@ -183,6 +188,12 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
     private void registerGreetServlet(ServletContext servletContext) {
         ServletRegistration reg = servletContext.addServlet("greetServlet", new GreetingServiceImpl());
         reg.addMapping("/jhipmonogwt/greet");
+    }
+
+    private void registerDispatchFilter(ServletContext servletContext, EnumSet<DispatcherType> disps) {
+        FilterRegistration reg = servletContext.addFilter("guiceFilter", new GuiceFilter());
+        reg.addMappingForUrlPatterns(disps, true, "/*");
+        servletContext.addListener(GuiceServletConfig.class);
     }
 
     @Bean
