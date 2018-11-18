@@ -80,8 +80,7 @@ springBoot {
 
 gwt {
     gwtVersion='2.8.2'
-//    gwtVersion='2.7.0'
-    modules 'com.zerphy.jhipmonogwt.gwt.Jhipmonogwt','com.zerphy.jhipmonogwt.gwtrest.GwtRest','com.zerphy.jhipmonogwt.gwtdispatch.GwtDispatch'
+    modules 'com.zerphy.jhipmonogwt.gwtrpc.GwtRpc','com.zerphy.jhipmonogwt.gwtrest.GwtRest','com.zerphy.jhipmonogwt.gwtdispatch.GwtDispatch'
     maxHeapSize = '1024M'
 }
 

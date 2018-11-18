@@ -1,4 +1,4 @@
-package com.zerphy.jhipmonogwt.gwt.shared;
+package com.zerphy.jhipmonogwt.gwtrpc.shared;
 
 /**
  * <p>

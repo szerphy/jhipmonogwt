@@ -1,8 +1,8 @@
-package com.zerphy.jhipmonogwt.gwt.server;
+package com.zerphy.jhipmonogwt.gwtrpc.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.zerphy.jhipmonogwt.gwt.client.GreetingService;
-import com.zerphy.jhipmonogwt.gwt.shared.FieldVerifier;
+import com.zerphy.jhipmonogwt.gwtrpc.client.GreetingService;
+import com.zerphy.jhipmonogwt.gwtrpc.shared.FieldVerifier;
 
 /**
  * The server-side implementation of the RPC service.

@@ -4,7 +4,7 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
 import com.google.inject.servlet.GuiceFilter;
-import com.zerphy.jhipmonogwt.gwt.server.GreetingServiceImpl;
+import com.zerphy.jhipmonogwt.gwtrpc.server.GreetingServiceImpl;
 import com.zerphy.jhipmonogwt.gwtshared.server.guice.GuiceServletConfig;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.JHipsterProperties;
@@ -187,7 +187,7 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
 
     private void registerGreetServlet(ServletContext servletContext) {
         ServletRegistration reg = servletContext.addServlet("greetServlet", new GreetingServiceImpl());
-        reg.addMapping("/jhipmonogwt/greet");
+        reg.addMapping("/gwtrpc/greet");
     }
 
     private void registerDispatchFilter(ServletContext servletContext, EnumSet<DispatcherType> disps) {

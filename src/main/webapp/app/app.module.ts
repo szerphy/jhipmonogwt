@@ -17,7 +17,7 @@ import { JhipmonogwtAppRoutingModule } from './app-routing.module';
 import { JhipmonogwtHomeModule } from './home/home.module';
 import { JhipmonogwtAccountModule } from './account/account.module';
 import { JhipmonogwtEntityModule } from './entities/entity.module';
-import { GwtModule } from './gwt';
+import { GwtRpcModule } from './gwt-rpc';
 import { GwtRestModule } from './gwt-rest';
 import { GwtDispatchModule } from './gwt-dispatch';
 import * as moment from 'moment';
@@ -35,7 +35,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         JhipmonogwtAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         JhipmonogwtEntityModule,
-        GwtModule,
+        GwtRpcModule,
         GwtRestModule,
         GwtDispatchModule
     ],

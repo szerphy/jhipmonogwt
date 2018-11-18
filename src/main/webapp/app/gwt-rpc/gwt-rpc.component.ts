@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'jhi-gwt',
-    templateUrl: './gwt.component.html',
-    styleUrls: ['./gwt.css']
+    selector: 'jhi-gwt-rpc',
+    templateUrl: './gwt-rpc.component.html',
+    styleUrls: ['./gwt-rpc.css']
 })
-export class GwtComponent implements OnInit {
+export class GwtRpcComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
         // load gwt script
         const node = document.createElement('script');
-        node.src = 'jhipmonogwt/jhipmonogwt.nocache.js';
+        node.src = 'gwtrpc/gwtrpc.nocache.js';
         node.type = 'text/javascript';
         node.async = false;
         node.charset = 'utf-8';

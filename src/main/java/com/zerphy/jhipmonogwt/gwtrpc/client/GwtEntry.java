@@ -1,4 +1,4 @@
-package com.zerphy.jhipmonogwt.gwt.client;
+package com.zerphy.jhipmonogwt.gwtrpc.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.zerphy.jhipmonogwt.gwt.shared.FieldVerifier;
+import com.zerphy.jhipmonogwt.gwtrpc.shared.FieldVerifier;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
